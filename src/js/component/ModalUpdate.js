@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext.js";
 
-export const Modal = props => {
+export const ModalUpdate = props => {
 	const [state, setState] = useState({
 		//initialize state here
 	});
@@ -25,7 +25,7 @@ export const Modal = props => {
 			<div className="modal-dialog" role="document">
 				<div className="modal-content">
 					<div className="modal-header">
-						<h5 className="modal-title">Are you sure?</h5>
+						<h5 className="modal-title">Update your contact:</h5>
 						{props.onClose ? (
 							<button
 								onClick={() => props.onClose()}
@@ -39,20 +39,43 @@ export const Modal = props => {
 							""
 						)}
 					</div>
-					<div className="modal-body">
-						<p>Warning: unknown consequences after this point... Kidding!</p>
-					</div>
-					<div className="modal-footer">
-						<button type="button" className="btn btn-primary" onClick={() => props.onClose()}>
-							Oh no!
-						</button>
-						<button
-							type="button"
-							className="btn btn-secondary"
-							data-dismiss="modal"
-							onClick={() => handleDeleteContact(props.id)}>
-							Do it!
-						</button>
+					<div className="modal-body container">
+						<div>
+							{/*especiicarel submit que estara vinculado a una funcion agregar contacto*/}
+							<form>
+								<div className="form-group">
+									<label>Full Name</label>
+									{/* especificiar el evento on change en cada uno */}
+									<input
+										type="text"
+										className="form-control"
+										placeholder={props.name}
+										//onChange={handleName}
+									/>
+								</div>
+								<div className="form-group">
+									<label>Phone</label>
+									<input
+										type="phone"
+										className="form-control"
+										placeholder={props.phone}
+										//onChange={handlePhone}
+									/>
+								</div>
+								<div className="form-group">
+									<label>Address</label>
+									<input
+										type="text"
+										className="form-control"
+										placeholder={props.address}
+										//onChange={handleAddress}
+									/>
+								</div>
+								<button type="submit" className="btn btn-primary form-control">
+									save
+								</button>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -63,18 +86,21 @@ export const Modal = props => {
  * Define the data-types for
  * your component's properties
  **/
-Modal.propTypes = {
+ModalUpdate.propTypes = {
 	history: PropTypes.object,
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
-	id: PropTypes.number
+	id: PropTypes.number,
+	name: PropTypes.string,
+	phone: PropTypes.number,
+	address: PropTypes.string
 };
 
 /**
  * Define the default values for
  * your component's properties
  **/
-Modal.defaultProps = {
+ModalUpdate.defaultProps = {
 	show: false,
 	onClose: null
 };

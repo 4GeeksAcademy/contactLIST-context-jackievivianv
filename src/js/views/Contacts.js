@@ -4,11 +4,13 @@ import { Context } from "../store/appContext.js";
 
 import { ContactCard } from "../component/ContactCard.js";
 import { Modal } from "../component/Modal";
+import { ModalUpdate } from "../component/ModalUpdate.js";
 
 export const Contacts = () => {
 	const [state, setState] = useState({
 		showModal: false,
-		contactIdToDelete: null
+		contactIdToDelete: null,
+		showModalUpdate: false
 	});
 
 	const { store, actions } = useContext(Context);
@@ -36,12 +38,29 @@ export const Contacts = () => {
 								address={item.address}
 								phone={item.phone}
 								onDelete={() => setState({ showModal: true, contactIdToDelete: item.id })}
+								onUpdate={() =>
+									setState({
+										showModalUpdate: true,
+										contactId: item.id,
+										name: item.full_name,
+										phone: item.phone,
+										address: item.address
+									})
+								}
 							/>
 						))}
 					</ul>
 				</div>
 			</div>
 			<Modal show={state.showModal} id={state.contactIdToDelete} onClose={() => setState({ showModal: false })} />
+			<ModalUpdate
+				show={state.showModalUpdate}
+				id={state.contactId}
+				name={state.name}
+				phone={state.phone}
+				address={state.address}
+				onClose={() => setState({ showModalUpdate: false })}
+			/>
 		</div>
 	);
 };
