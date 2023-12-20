@@ -1,4 +1,4 @@
-const getState = ({ getStore, setStore }) => {
+const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			//Your data structures, A.K.A Entities
@@ -23,6 +23,23 @@ const getState = ({ getStore, setStore }) => {
 					body: JSON.stringify(newContact)
 				})
 					.then(response => response.json())
+					.then(data => console.log(data))
+					.catch(error => console.log(error));
+			},
+			deleteContact: contactId => {
+				console.log(contactId);
+
+				fetch(`https://playground.4geeks.com/apis/fake/contact/${contactId}`, {
+					method: "DELETE"
+				})
+					.then(response => {
+						console.log(response.status);
+						if (response.status == 201) {
+							getActions().getAllAgenda();
+						}
+
+						return response.json();
+					})
 					.then(data => console.log(data))
 					.catch(error => console.log(error));
 			}
