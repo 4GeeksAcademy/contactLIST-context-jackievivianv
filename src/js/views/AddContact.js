@@ -26,7 +26,7 @@ export const AddContact = () => {
 	}
 
 	function handleSaveContact(event) {
-		//event.preventDefault();
+		event.preventDefault();
 		const newData = {
 			full_name: newName,
 			email: newEmail,
@@ -36,11 +36,6 @@ export const AddContact = () => {
 		};
 		console.log(newData);
 		actions.createContact(newData);
-
-		setNewName("");
-		setNewEmail("");
-		setNewPhone("");
-		setNewAddress("");
 	}
 
 	return (

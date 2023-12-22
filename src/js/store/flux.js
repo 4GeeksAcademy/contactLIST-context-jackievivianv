@@ -42,6 +42,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(data => console.log(data))
 					.catch(error => console.log(error));
+			},
+			updateContact: (contactId, updateData) => {
+				console.log(contactId, updateData);
+				fetch(`https://playground.4geeks.com/apis/fake/contact/${contactId}`, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(updateData)
+				})
+					.then(response => {
+						console.log(response.status);
+						if (response.status == 201) {
+							getActions().getAllAgenda();
+						}
+
+						return response.json();
+					})
+					.then(data => console.log(data))
+					.catch(error => console.log(error));
 			}
 		}
 	};

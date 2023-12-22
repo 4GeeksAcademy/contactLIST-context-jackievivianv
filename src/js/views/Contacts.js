@@ -44,7 +44,8 @@ export const Contacts = () => {
 										contactId: item.id,
 										name: item.full_name,
 										phone: item.phone,
-										address: item.address
+										address: item.address,
+										email: item.email
 									})
 								}
 							/>
@@ -59,6 +60,7 @@ export const Contacts = () => {
 				name={state.name}
 				phone={state.phone}
 				address={state.address}
+				email={state.email}
 				onClose={() => setState({ showModalUpdate: false })}
 			/>
 		</div>

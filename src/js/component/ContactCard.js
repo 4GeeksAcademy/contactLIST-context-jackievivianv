@@ -60,7 +60,7 @@ ContactCard.propTypes = {
 	full_name: PropTypes.string,
 	email: PropTypes.string,
 	address: PropTypes.string,
-	phone: PropTypes.string
+	phone: PropTypes.number
 };
 
 /**

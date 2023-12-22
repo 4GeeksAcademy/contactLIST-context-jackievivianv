@@ -8,16 +8,38 @@ export const ModalUpdate = props => {
 		//initialize state here
 	});
 
-	const { store, actions } = useContext(Context);
-
 	const { showModal, contactIdToDelete } = state;
 
-	//function removeContact(index) {
-	//	actions.deleteContact(index);
-	//}
+	const [updateName, setUpdateName] = useState("");
+	//const [newEmail, setNewEmail] = useState("");
+	const [updatePhone, setUpdatePhone] = useState("");
+	const [updateAddress, setUpdateAddress] = useState("");
 
-	function handleDeleteContact(contactId) {
-		actions.deleteContact(contactId);
+	const { store, actions } = useContext(Context);
+
+	function handleName(event) {
+		setUpdateName(event.target.value);
+	}
+	function handlePhone(event) {
+		setUpdatePhone(event.target.value);
+	}
+	function handleAddress(event) {
+		setUpdateAddress(event.target.value);
+	}
+
+	function handleUpdateContact(event) {
+		event.preventDefault();
+
+		const updateData = {
+			id: props.id,
+			full_name: updateName,
+			email: props.email,
+			phone: updatePhone,
+			address: updateAddress,
+			agenda_slug: "jackievivianv"
+		};
+		console.log(updateData.id, updateData);
+		actions.updateContact(updateData.id, updateData);
 	}
 
 	return (
@@ -42,7 +64,7 @@ export const ModalUpdate = props => {
 					<div className="modal-body container">
 						<div>
 							{/*especiicarel submit que estara vinculado a una funcion agregar contacto*/}
-							<form>
+							<form onSubmit={handleUpdateContact}>
 								<div className="form-group">
 									<label>Full Name</label>
 									{/* especificiar el evento on change en cada uno */}
@@ -50,7 +72,7 @@ export const ModalUpdate = props => {
 										type="text"
 										className="form-control"
 										placeholder={props.name}
-										//onChange={handleName}
+										onChange={handleName}
 									/>
 								</div>
 								<div className="form-group">
@@ -59,7 +81,7 @@ export const ModalUpdate = props => {
 										type="phone"
 										className="form-control"
 										placeholder={props.phone}
-										//onChange={handlePhone}
+										onChange={handlePhone}
 									/>
 								</div>
 								<div className="form-group">
@@ -68,11 +90,11 @@ export const ModalUpdate = props => {
 										type="text"
 										className="form-control"
 										placeholder={props.address}
-										//onChange={handleAddress}
+										onChange={handleAddress}
 									/>
 								</div>
 								<button type="submit" className="btn btn-primary form-control">
-									save
+									Save Changes
 								</button>
 							</form>
 						</div>
@@ -93,7 +115,8 @@ ModalUpdate.propTypes = {
 	id: PropTypes.number,
 	name: PropTypes.string,
 	phone: PropTypes.number,
-	address: PropTypes.string
+	address: PropTypes.string,
+	email: PropTypes.string
 };
 
 /**
