@@ -8,36 +8,43 @@ export const ModalUpdate = props => {
 		//initialize state here
 	});
 
-	const { showModal, contactIdToDelete } = state;
-
-	const [updateName, setUpdateName] = useState("");
-	//const [newEmail, setNewEmail] = useState("");
-	const [updatePhone, setUpdatePhone] = useState("");
-	const [updateAddress, setUpdateAddress] = useState("");
+	//const { showModal, contactIdToDelete } = state;
+	//const [showModal, setShowModal] = useState(false);
+	const [inputValueName, setInputValueName] = useState(props.full_name);
+	const [inputValuePhone, setInputValuePhone] = useState(props.phone);
+	const [inputValueAddress, setInputValueAddress] = useState(props.address);
 
 	const { store, actions } = useContext(Context);
 
+	/*function handleReload() {
+		window.location.reload();
+	}*/
+
 	function handleName(event) {
-		setUpdateName(event.target.value);
+		//setUpdateName(event.target.value);
+		setInputValueName(event.target.value);
 	}
+
 	function handlePhone(event) {
-		setUpdatePhone(event.target.value);
+		//setUpdatePhone(event.target.value);
+		setInputValuePhone(event.target.value);
 	}
+
 	function handleAddress(event) {
-		setUpdateAddress(event.target.value);
+		//setUpdateAddress(event.target.value);
+		setInputValueAddress(event.target.value);
 	}
 
-	function handleUpdateContact(event) {
-		event.preventDefault();
-
+	function handleUpdateContact(name, phone, address) {
 		const updateData = {
 			id: props.id,
-			full_name: updateName,
+			full_name: name || props.full_name,
 			email: props.email,
-			phone: updatePhone,
-			address: updateAddress,
+			phone: phone || props.phone,
+			address: address || props.address,
 			agenda_slug: "jackievivianv"
 		};
+
 		console.log(updateData.id, updateData);
 		actions.updateContact(updateData.id, updateData);
 	}
@@ -63,16 +70,21 @@ export const ModalUpdate = props => {
 					</div>
 					<div className="modal-body container">
 						<div>
-							{/*especiicarel submit que estara vinculado a una funcion agregar contacto*/}
-							<form onSubmit={handleUpdateContact}>
+							<form
+								onSubmit={event => {
+									event.preventDefault();
+									handleUpdateContact(inputValueName, inputValuePhone, inputValueAddress);
+								}}>
 								<div className="form-group">
 									<label>Full Name</label>
 									{/* especificiar el evento on change en cada uno */}
 									<input
 										type="text"
 										className="form-control"
-										placeholder={props.name}
+										defaultValue={props.full_name}
+										//placeholder={props.name}
 										onChange={handleName}
+										//onBlur={handleBlurName}
 									/>
 								</div>
 								<div className="form-group">
@@ -80,8 +92,10 @@ export const ModalUpdate = props => {
 									<input
 										type="phone"
 										className="form-control"
-										placeholder={props.phone}
+										defaultValue={props.phone}
+										//placeholder={props.phone}
 										onChange={handlePhone}
+										//onBlur={handleBlurPhone}
 									/>
 								</div>
 								<div className="form-group">
@@ -89,8 +103,10 @@ export const ModalUpdate = props => {
 									<input
 										type="text"
 										className="form-control"
-										placeholder={props.address}
+										defaultValue={props.address}
+										//placeholder={props.address}
 										onChange={handleAddress}
+										//onBlur={handleBlurAddress}
 									/>
 								</div>
 								<button type="submit" className="btn btn-primary form-control">
@@ -113,8 +129,8 @@ ModalUpdate.propTypes = {
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
 	id: PropTypes.number,
-	name: PropTypes.string,
-	phone: PropTypes.number,
+	full_name: PropTypes.string,
+	phone: PropTypes.string,
 	address: PropTypes.string,
 	email: PropTypes.string
 };

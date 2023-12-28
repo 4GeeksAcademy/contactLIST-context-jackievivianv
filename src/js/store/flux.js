@@ -44,7 +44,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log(error));
 			},
 			updateContact: (contactId, updateData) => {
-				console.log(contactId, updateData);
+				console.log(updateData);
+
 				fetch(`https://playground.4geeks.com/apis/fake/contact/${contactId}`, {
 					method: "PUT",
 					headers: {

@@ -10,11 +10,18 @@ export const Contacts = () => {
 	const [state, setState] = useState({
 		showModal: false,
 		contactIdToDelete: null,
-		showModalUpdate: false
+		showModalUpdate: false,
+		contactId: null,
+		full_name: null,
+		phone: null,
+		address: null,
+		email: null
 	});
 
 	const { store, actions } = useContext(Context);
-	console.log(state);
+	console.log(state.full_name);
+	console.log(state.phone);
+	console.log(state.address);
 
 	useEffect(() => {
 		actions.getAllAgenda();
@@ -42,7 +49,7 @@ export const Contacts = () => {
 									setState({
 										showModalUpdate: true,
 										contactId: item.id,
-										name: item.full_name,
+										full_name: item.full_name,
 										phone: item.phone,
 										address: item.address,
 										email: item.email
@@ -57,7 +64,7 @@ export const Contacts = () => {
 			<ModalUpdate
 				show={state.showModalUpdate}
 				id={state.contactId}
-				name={state.name}
+				full_name={state.full_name}
 				phone={state.phone}
 				address={state.address}
 				email={state.email}
