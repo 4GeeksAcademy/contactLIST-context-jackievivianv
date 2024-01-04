@@ -2,7 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			//Your data structures, A.K.A Entities
-			contacts: []
+			contacts: [],
+			infoContact: null
 		},
 		actions: {
 			//(Arrow) Functions that update the Store
@@ -11,6 +12,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/jackievivianv")
 					.then(response => response.json())
 					.then(data => setStore({ contacts: data }))
+					.catch(error => console.log(error));
+			},
+			getOneContact: contactId => {
+				console.log(contactId);
+				fetch(`https://playground.4geeks.com/apis/fake/contact/${contactId}`)
+					.then(response => response.json())
+					.then(data => console.log(data))
+					//.then(data => setStore({ contacts: data }))
 					.catch(error => console.log(error));
 			},
 			createContact: newContact => {

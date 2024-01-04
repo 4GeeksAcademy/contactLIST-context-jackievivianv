@@ -13,7 +13,7 @@ export const ModalUpdate = props => {
 	const [inputValueName, setInputValueName] = useState(props.full_name);
 	const [inputValuePhone, setInputValuePhone] = useState(props.phone);
 	const [inputValueAddress, setInputValueAddress] = useState(props.address);
-
+	const [id, setInputId] = useState(props.id);
 	const { store, actions } = useContext(Context);
 
 	/*function handleReload() {
@@ -47,7 +47,16 @@ export const ModalUpdate = props => {
 
 		console.log(updateData.id, updateData);
 		actions.updateContact(updateData.id, updateData);
+		console.log(props.phone);
 	}
+
+	//console.log(props.id);
+	useEffect(() => {
+		if (id !== null || id !== undefined) {
+			console.log(id);
+			//actions.getOneContact(props.id);
+		}
+	}, [id]);
 
 	return (
 		<div className="modal" tabIndex="-1" role="dialog" style={{ display: props.show ? "inline-block" : "none" }}>
