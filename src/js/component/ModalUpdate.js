@@ -81,13 +81,13 @@ export const ModalUpdate = props => {
 						<div>
 							<form
 								onSubmit={event => {
-									event.preventDefault();
+									
 									handleUpdateContact(inputValueName, inputValuePhone, inputValueAddress);
 								}}>
 								<div className="form-group">
 									<label>Full Name</label>
 									{/* especificiar el evento on change en cada uno */}
-									<input
+									<inputnp
 										type="text"
 										className="form-control"
 										defaultValue={props.full_name}
